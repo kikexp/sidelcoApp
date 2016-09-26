@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26-sep-2016 11:41:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelos.Cadetes" table="cadetes" catalog="sidelcodb" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        <property name="dni" type="java.lang.Integer">
+            <column name="Dni" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="Nombre" length="30" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="Apellido" length="30" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="Direccion" length="30" />
+        </property>
+        <property name="telefono" type="java.lang.Integer">
+            <column name="Telefono" />
+        </property>
+        <set name="ticketCadetes" table="ticket_cadete" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IdCadete" />
+            </key>
+            <one-to-many class="Modelos.TicketCadete" />
+        </set>
+    </class>
+</hibernate-mapping>

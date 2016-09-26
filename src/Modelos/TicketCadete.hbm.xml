@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26-sep-2016 11:41:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelos.TicketCadete" table="ticket_cadete" catalog="sidelcodb" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cadetes" class="Modelos.Cadetes" fetch="select">
+            <column name="IdCadete" />
+        </many-to-one>
+        <many-to-one name="factura" class="Modelos.Factura" fetch="select">
+            <column name="IdFactura" />
+        </many-to-one>
+        <property name="zona" type="string">
+            <column name="Zona" length="10" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="Direccion" length="40" />
+        </property>
+        <property name="monto" type="java.lang.Integer">
+            <column name="Monto" />
+        </property>
+    </class>
+</hibernate-mapping>
