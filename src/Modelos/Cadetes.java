@@ -1,5 +1,5 @@
 package Modelos;
-// Generated 26-sep-2016 11:41:16 by Hibernate Tools 4.3.1
+// Generated 29-sep-2016 15:20:51 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,46 +11,33 @@ import java.util.Set;
 public class Cadetes  implements java.io.Serializable {
 
 
-     private Integer id;
-     private Integer dni;
+     private int dni;
      private String nombre;
      private String apellido;
      private String direccion;
      private Integer telefono;
-     private Set ticketCadetes = new HashSet(0);
+     private Set facturas = new HashSet(0);
 
     public Cadetes() {
     }
 
-    public Cadetes(Integer dni, String nombre, String apellido, String direccion, Integer telefono) {
+	
+    public Cadetes(int dni) {
         this.dni = dni;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.direccion = direccion;
-        this.telefono = telefono;
     }
-
-    public Cadetes(Integer dni, String nombre, String apellido, String direccion, Integer telefono, Set ticketCadetes) {
+    public Cadetes(int dni, String nombre, String apellido, String direccion, Integer telefono) {
        this.dni = dni;
        this.nombre = nombre;
        this.apellido = apellido;
        this.direccion = direccion;
        this.telefono = telefono;
-       this.ticketCadetes = ticketCadetes;
     }
    
-    public Integer getId() {
-        return this.id;
-    }
-    
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public Integer getDni() {
+    public int getDni() {
         return this.dni;
     }
     
-    public void setDni(Integer dni) {
+    public void setDni(int dni) {
         this.dni = dni;
     }
     public String getNombre() {
@@ -81,12 +68,12 @@ public class Cadetes  implements java.io.Serializable {
     public void setTelefono(Integer telefono) {
         this.telefono = telefono;
     }
-    public Set getTicketCadetes() {
-        return this.ticketCadetes;
+    public Set getFacturas() {
+        return this.facturas;
     }
     
-    public void setTicketCadetes(Set ticketCadetes) {
-        this.ticketCadetes = ticketCadetes;
+    public void setFacturas(Set facturas) {
+        this.facturas = facturas;
     }
 
 

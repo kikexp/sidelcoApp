@@ -55,6 +55,56 @@ public class Operaciones {
         return cli;
         
     }
+     public Cadetes buscarCadete(int idCad) {
+        Cadetes cad;
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session;
+        session = sesion.openSession();
+        Transaction tx = session.beginTransaction();
+        cad  = (Cadetes) session.get(Cadetes.class,  idCad);
+        tx.commit();
+        session.close();
+        
+        return cad;
+        
+    }
+     
+     public Factura buscarFactura(int idfac) {
+        Factura fact;
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session;
+        session = sesion.openSession();
+        Transaction tx = session.beginTransaction();
+        fact  = (Factura) session.get(Factura.class,  idfac);
+        tx.commit();
+        session.close(); 
+        return fact;     
+    }
+     
+     
+     public Comidas buscarComida(int idCom) {
+        Comidas com;
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session;
+        session = sesion.openSession();
+        Transaction tx = session.beginTransaction();
+        com  = (Comidas) session.get(Comidas.class,  idCom);
+        tx.commit();
+        session.close(); 
+        return com;     
+    }
+     public List listarFacturas() {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();        
+        Transaction tx = session.beginTransaction();
+        Query q = session.createQuery("from Factura order by IdFactura desc");
+        List<Factura> lista = q.list();
+        Iterator<Factura> iter = lista.iterator();
+        tx.commit();
+        session.close();
+        return lista;
+
+    }
     public DefaultListModel listarClientes() {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();        

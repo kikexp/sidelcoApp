@@ -1,16 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 26-sep-2016 11:41:17 by Hibernate Tools 4.3.1 -->
+<!-- Generated 29-sep-2016 15:20:51 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="Modelos.Cadetes" table="cadetes" catalog="sidelcodb" optimistic-lock="version">
-        <id name="id" type="java.lang.Integer">
-            <column name="Id" />
-            <generator class="identity" />
-        </id>
-        <property name="dni" type="java.lang.Integer">
+    <class name="Modelos.Cadetes" table="cadetes" catalog="sidelcobd" optimistic-lock="version">
+        <id name="dni" type="int">
             <column name="Dni" />
-        </property>
+            <generator class="assigned" />
+        </id>
         <property name="nombre" type="string">
             <column name="Nombre" length="30" />
         </property>
@@ -23,11 +20,11 @@
         <property name="telefono" type="java.lang.Integer">
             <column name="Telefono" />
         </property>
-        <set name="ticketCadetes" table="ticket_cadete" inverse="true" lazy="true" fetch="select">
+        <set name="facturas" table="factura" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="IdCadete" />
+                <column name="DniCadete" />
             </key>
-            <one-to-many class="Modelos.TicketCadete" />
+            <one-to-many class="Modelos.Factura" />
         </set>
     </class>
 </hibernate-mapping>

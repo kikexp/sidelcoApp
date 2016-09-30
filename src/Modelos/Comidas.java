@@ -1,5 +1,5 @@
 package Modelos;
-// Generated 26-sep-2016 11:41:16 by Hibernate Tools 4.3.1
+// Generated 29-sep-2016 15:20:51 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -10,27 +10,20 @@ import java.util.Set;
  */
 public class Comidas  implements java.io.Serializable {
 
-    public Comidas(String nombre, String descripcion, Float precioUnidad) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precioUnidad = precioUnidad;
-    }
-
 
      private Integer id;
      private String nombre;
      private String descripcion;
      private Float precioUnidad;
-     private Set facturaitemses = new HashSet(0);
+     private Set pedidos = new HashSet(0);
 
     public Comidas() {
     }
 
-    public Comidas(String nombre, String descripcion, Float precioUnidad, Set facturaitemses) {
+    public Comidas(String nombre, String descripcion, Float precioUnidad) {
        this.nombre = nombre;
        this.descripcion = descripcion;
        this.precioUnidad = precioUnidad;
-       this.facturaitemses = facturaitemses;
     }
    
     public Integer getId() {
@@ -61,12 +54,12 @@ public class Comidas  implements java.io.Serializable {
     public void setPrecioUnidad(Float precioUnidad) {
         this.precioUnidad = precioUnidad;
     }
-    public Set getFacturaitemses() {
-        return this.facturaitemses;
+    public Set getPedidos() {
+        return this.pedidos;
     }
     
-    public void setFacturaitemses(Set facturaitemses) {
-        this.facturaitemses = facturaitemses;
+    public void setPedidos(Set pedidos) {
+        this.pedidos = pedidos;
     }
 
 

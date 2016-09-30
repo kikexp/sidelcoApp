@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29-sep-2016 15:20:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelos.Pedido" table="pedido" catalog="sidelcobd" optimistic-lock="version">
+        <composite-id name="id" class="Modelos.PedidoId">
+            <key-property name="idFactura" type="int">
+                <column name="IdFactura" />
+            </key-property>
+            <key-property name="idComida" type="int">
+                <column name="IdComida" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="comidas" class="Modelos.Comidas" update="false" insert="false" fetch="select">
+            <column name="IdComida" not-null="true" />
+        </many-to-one>
+        <many-to-one name="factura" class="Modelos.Factura" update="false" insert="false" fetch="select">
+            <column name="IdFactura" not-null="true" />
+        </many-to-one>
+        <property name="totalParcial" type="java.lang.Float">
+            <column name="TotalParcial" precision="12" scale="0" />
+        </property>
+        <property name="cantidad" type="int">
+            <column name="Cantidad" not-null="true" />
+        </property>
+        <property name="precioXunidad" type="java.lang.Float">
+            <column name="PrecioXunidad" precision="12" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

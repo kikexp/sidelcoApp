@@ -1,36 +1,36 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 26-sep-2016 11:41:17 by Hibernate Tools 4.3.1 -->
+<!-- Generated 29-sep-2016 15:20:51 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="Modelos.Factura" table="factura" catalog="sidelcodb" optimistic-lock="version">
-        <id name="id" type="java.lang.Integer">
-            <column name="Id" />
-            <generator class="identity" />
+    <class name="Modelos.Factura" table="factura" catalog="sidelcobd" optimistic-lock="version">
+        <id name="idFactura" type="int">
+            <column name="IdFactura" />
+            <generator class="assigned" />
         </id>
-        <property name="total" type="java.lang.Double">
-            <column name="Total" precision="22" scale="0" />
-        </property>
+        <many-to-one name="cadetes" class="Modelos.Cadetes" fetch="select">
+            <column name="DniCadete" />
+        </many-to-one>
+        <many-to-one name="clientes" class="Modelos.Clientes" fetch="select">
+            <column name="TelefonoC" />
+        </many-to-one>
         <property name="fechaHora" type="timestamp">
             <column name="FechaHora" length="19" />
         </property>
-        <property name="estadoFactura" type="java.lang.Boolean">
-            <column name="EstadoFactura" />
+        <property name="zona" type="java.lang.Boolean">
+            <column name="Zona" />
         </property>
-        <property name="clienteId" type="java.lang.Integer">
-            <column name="ClienteId" />
+        <property name="montoDeliv" type="java.lang.Float">
+            <column name="MontoDeliv" precision="12" scale="0" />
         </property>
-        <set name="ticketCadetes" table="ticket_cadete" inverse="true" lazy="true" fetch="select">
+        <property name="montoTotal" type="java.lang.Float">
+            <column name="MontoTotal" precision="12" scale="0" />
+        </property>
+        <set name="pedidos" table="pedido" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="IdFactura" />
+                <column name="IdFactura" not-null="true" />
             </key>
-            <one-to-many class="Modelos.TicketCadete" />
-        </set>
-        <set name="facturaitemses" table="facturaitems" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="FacturaId" not-null="true" />
-            </key>
-            <one-to-many class="Modelos.Facturaitems" />
+            <one-to-many class="Modelos.Pedido" />
         </set>
     </class>
 </hibernate-mapping>

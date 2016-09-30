@@ -1,5 +1,5 @@
 package Modelos;
-// Generated 26-sep-2016 11:41:16 by Hibernate Tools 4.3.1
+// Generated 29-sep-2016 15:20:51 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -12,39 +12,52 @@ import java.util.Set;
 public class Factura  implements java.io.Serializable {
 
 
-     private Integer id;
-     private Double total;
+     private int idFactura;
+     private Cadetes cadetes;
+     private Clientes clientes;
      private Date fechaHora;
-     private Boolean estadoFactura;
-     private Integer clienteId;
-     private Set ticketCadetes = new HashSet(0);
-     private Set facturaitemses = new HashSet(0);
+     private Boolean zona;
+     private Float montoDeliv;
+     private Float montoTotal;
+     private Set pedidos = new HashSet(0);
 
     public Factura() {
     }
 
-    public Factura(Double total, Date fechaHora, Boolean estadoFactura, Integer clienteId, Set ticketCadetes, Set facturaitemses) {
-       this.total = total;
+	
+    public Factura(int idFactura) {
+        this.idFactura = idFactura;
+    }
+     public Factura(int id, Cadetes cadetes, Clientes clientes, Date fechaHora, Boolean zona, Float montoDeliv, Float montoTotal) {
+       this.idFactura = id;
+       this.cadetes = cadetes;
+       this.clientes = clientes;
        this.fechaHora = fechaHora;
-       this.estadoFactura = estadoFactura;
-       this.clienteId = clienteId;
-       this.ticketCadetes = ticketCadetes;
-       this.facturaitemses = facturaitemses;
+       this.zona = zona;
+       this.montoDeliv = montoDeliv;
+       this.montoTotal = montoTotal;
     }
    
-    public Integer getId() {
-        return this.id;
+    public int getIdFactura() {
+        return this.idFactura;
     }
     
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdFactura(int idFactura) {
+        this.idFactura = idFactura;
     }
-    public Double getTotal() {
-        return this.total;
+    public Cadetes getCadetes() {
+        return this.cadetes;
     }
     
-    public void setTotal(Double total) {
-        this.total = total;
+    public void setCadetes(Cadetes cadetes) {
+        this.cadetes = cadetes;
+    }
+    public Clientes getClientes() {
+        return this.clientes;
+    }
+    
+    public void setClientes(Clientes clientes) {
+        this.clientes = clientes;
     }
     public Date getFechaHora() {
         return this.fechaHora;
@@ -53,33 +66,33 @@ public class Factura  implements java.io.Serializable {
     public void setFechaHora(Date fechaHora) {
         this.fechaHora = fechaHora;
     }
-    public Boolean getEstadoFactura() {
-        return this.estadoFactura;
+    public Boolean getZona() {
+        return this.zona;
     }
     
-    public void setEstadoFactura(Boolean estadoFactura) {
-        this.estadoFactura = estadoFactura;
+    public void setZona(Boolean zona) {
+        this.zona = zona;
     }
-    public Integer getClienteId() {
-        return this.clienteId;
-    }
-    
-    public void setClienteId(Integer clienteId) {
-        this.clienteId = clienteId;
-    }
-    public Set getTicketCadetes() {
-        return this.ticketCadetes;
+    public Float getMontoDeliv() {
+        return this.montoDeliv;
     }
     
-    public void setTicketCadetes(Set ticketCadetes) {
-        this.ticketCadetes = ticketCadetes;
+    public void setMontoDeliv(Float montoDeliv) {
+        this.montoDeliv = montoDeliv;
     }
-    public Set getFacturaitemses() {
-        return this.facturaitemses;
+    public Float getMontoTotal() {
+        return this.montoTotal;
     }
     
-    public void setFacturaitemses(Set facturaitemses) {
-        this.facturaitemses = facturaitemses;
+    public void setMontoTotal(Float montoTotal) {
+        this.montoTotal = montoTotal;
+    }
+    public Set getPedidos() {
+        return this.pedidos;
+    }
+    
+    public void setPedidos(Set pedidos) {
+        this.pedidos = pedidos;
     }
 
 
