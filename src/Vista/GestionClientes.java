@@ -5,6 +5,12 @@
  */
 package Vista;
 
+import Controlador.Operaciones;
+import Modelos.Historial;
+import Modelos.Usuario;
+import static Vista.Principal.user;
+import java.util.Date;
+
 /**
  *
  * @author ElíasRemedi
@@ -14,6 +20,9 @@ public class GestionClientes extends javax.swing.JFrame {
     /**
      * Creates new form GestionClientes
      */
+    Date fecha = new Date();
+    Operaciones oper = new Operaciones();
+
     public GestionClientes() {
         initComponents();
         setLocationRelativeTo(null);
@@ -102,13 +111,21 @@ public class GestionClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoClienteActionPerformed
-       new Vista.NuevoCliente().setVisible(true);
-       this.dispose();
+        new Vista.NuevoCliente().setVisible(true);
+        this.dispose();
+        
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Ingreso a Nuevo Clientes");
+        oper.altaReg(hist);
     }//GEN-LAST:event_jButtonNuevoClienteActionPerformed
 
     private void ListadoClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListadoClientesActionPerformed
         new Vista.ListadoClientes().setVisible(true);
         this.dispose();
+        
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Ingreso a Listado Clientes");
+        oper.altaReg(hist);
     }//GEN-LAST:event_ListadoClientesActionPerformed
 
     private void jButtonEditarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarClienteActionPerformed
@@ -116,40 +133,7 @@ public class GestionClientes extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButtonEditarClienteActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestionClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestionClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestionClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestionClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GestionClientes().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ListadoClientes;

@@ -5,6 +5,11 @@
  */
 package Vista;
 
+import Controlador.Operaciones;
+import Modelos.Historial;
+import static Vista.Principal.user;
+import java.util.Date;
+
 /**
  *
  * @author ElíasRemedi
@@ -14,6 +19,9 @@ public class GestionCadetes extends javax.swing.JFrame {
     /**
      * Creates new form GestionCadetes
      */
+    Date fecha = new Date();
+    Operaciones oper = new Operaciones();
+    
     public GestionCadetes() {
         initComponents();
         setLocationRelativeTo(null);
@@ -43,6 +51,11 @@ public class GestionCadetes extends javax.swing.JFrame {
         });
 
         jButtonEliminarCadete.setText("Eliminar Cadete");
+        jButtonEliminarCadete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarCadeteActionPerformed(evt);
+            }
+        });
 
         jButtonEditarCadete.setText("Editar Cadete");
         jButtonEditarCadete.addActionListener(new java.awt.event.ActionListener() {
@@ -94,6 +107,10 @@ public class GestionCadetes extends javax.swing.JFrame {
     private void jButtonAgregarCadeteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarCadeteActionPerformed
         new Vista.AltaCadete().setVisible(true);
         this.dispose();
+        
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Ingreso a Agregar Cadete");
+        oper.altaReg(hist);
     }//GEN-LAST:event_jButtonAgregarCadeteActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -104,42 +121,17 @@ public class GestionCadetes extends javax.swing.JFrame {
     private void jButtonEditarCadeteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarCadeteActionPerformed
        new Vista.EditarCadete().setVisible(true);
        this.dispose();
+       
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Ingreso a Editar Cadete");
+        oper.altaReg(hist);
     }//GEN-LAST:event_jButtonEditarCadeteActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestionCadetes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestionCadetes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestionCadetes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestionCadetes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jButtonEliminarCadeteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarCadeteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonEliminarCadeteActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GestionCadetes().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregarCadete;

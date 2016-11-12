@@ -7,6 +7,9 @@ package Vista;
 
 import Controlador.Operaciones;
 import Modelos.Clientes;
+import Modelos.Historial;
+import static Vista.Principal.user;
+import java.util.Date;
 
 /**
  *
@@ -15,6 +18,7 @@ import Modelos.Clientes;
 public class NuevoCliente extends javax.swing.JFrame {
 
     Operaciones oper;
+    Date fecha = new Date();
     /**
      * Creates new form NuevoCliente
      */
@@ -86,6 +90,11 @@ public class NuevoCliente extends javax.swing.JFrame {
         });
 
         centrica.setText("Centrica");
+        centrica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                centricaActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Zona ");
 
@@ -185,14 +194,26 @@ public class NuevoCliente extends javax.swing.JFrame {
         apellidoCliente.setText("");
         direccionCliente.setText("");
         this.dispose();
+        
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Registro un Nuevo Clientes");
+        oper.altaReg(hist);
         new Vista.GestionClientes().setVisible(true);
         
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
        this.dispose();
+       
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Cancelo la creacion de un nuevo Cliente");
+        oper.altaReg(hist);
        new Vista.GestionClientes().setVisible(true);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void centricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_centricaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_centricaActionPerformed
 
     /**
      * @param args the command line arguments

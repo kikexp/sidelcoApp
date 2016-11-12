@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-nov-2016 0:37:55 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelos.Usuario" table="usuario" catalog="sidelcobd" optimistic-lock="version">
+        <id name="nombreUsuario" type="string">
+            <column name="NombreUsuario" length="30" />
+            <generator class="assigned" />
+        </id>
+        <property name="contrasenia" type="string">
+            <column name="Contrasenia" length="30" />
+        </property>
+        <property name="gestionCadetes" type="java.lang.Boolean">
+            <column name="GestionCadetes" />
+        </property>
+        <property name="gestionMenu" type="java.lang.Boolean">
+            <column name="GestionMenu" />
+        </property>
+        <property name="gestionClientes" type="java.lang.Boolean">
+            <column name="GestionClientes" />
+        </property>
+        <property name="gestionEstadisticas" type="java.lang.Boolean">
+            <column name="GestionEstadisticas" />
+        </property>
+        <property name="gestionUsuarios" type="java.lang.Boolean">
+            <column name="GestionUsuarios" />
+        </property>
+        <property name="gestionFacturacion" type="java.lang.Boolean">
+            <column name="GestionFacturacion" />
+        </property>
+        <set name="historials" table="historial" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="User" length="30" />
+            </key>
+            <one-to-many class="Modelos.Historial" />
+        </set>
+    </class>
+</hibernate-mapping>

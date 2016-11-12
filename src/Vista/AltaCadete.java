@@ -169,7 +169,7 @@ public class AltaCadete extends javax.swing.JFrame {
         // TODO add your handling code here:
         Cadetes cadete = new Cadetes(Integer.parseInt(dniCadete.getText()), nombreCadete.getText(),
         apellidoCadete.getText(), direccionCadete.getText(),Integer.parseInt(telefonoCadete.getText()));
-        oper.alta(cadete);
+        oper.altaReg(cadete);
         this.dispose();
         new Vista.AltaCadete().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed

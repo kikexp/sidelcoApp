@@ -4,14 +4,15 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sidelcodb?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sidelcobd?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">root</property>
+    <property name="hibernate.connection.password">1234</property>
     <mapping resource="Modelos/Factura.hbm.xml"/>
+    <mapping resource="Modelos/Usuario.hbm.xml"/>
     <mapping resource="Modelos/Comidas.hbm.xml"/>
-    <mapping resource="Modelos/TicketCadete.hbm.xml"/>
-    <mapping resource="Modelos/Clientes.hbm.xml"/>
-    <mapping resource="Modelos/Facturaitems.hbm.xml"/>
     <mapping resource="Modelos/Cadetes.hbm.xml"/>
+    <mapping resource="Modelos/Historial.hbm.xml"/>
+    <mapping resource="Modelos/Clientes.hbm.xml"/>
+    <mapping resource="Modelos/Pedido.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

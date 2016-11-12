@@ -7,6 +7,7 @@ package Vista;
 
 import Controlador.Operaciones;
 import Modelos.*;
+import static Vista.Principal.user;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -454,6 +455,9 @@ public class NuevaFactura extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
         new Vista.Principal().setVisible(true);
+         fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Cancelo la generacion de Factura");
+        oper.altaReg(hist);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void telClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telClienteActionPerformed
@@ -547,51 +551,22 @@ public class NuevaFactura extends javax.swing.JFrame {
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         // TODO add your handling code here:
         Clientes cli=oper.buscarCliente(Integer.parseInt(telCliente.getText()));
-       Cadetes cad = oper.buscarCadete(Integer.parseInt(dniCadete.getText()));
+        Cadetes cad = oper.buscarCadete(Integer.parseInt(dniCadete.getText()));
         Factura fact = new Factura(idfact, cad, cli , fecha, cli.getZona(), 
                Float.parseFloat(montoDeliveri.getText()), Float.parseFloat(total.getText()));
-        oper.alta(fact);
+        oper.altaReg(fact);
         Iterator punt = pedidos.iterator();
         while(punt.hasNext()){
-            oper.alta((Pedido)punt.next());
+            oper.altaReg((Pedido)punt.next());
         }
+        JOptionPane.showMessageDialog(null, "Factura guardada correctamente");
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Genero uno factura");
+        oper.altaReg(hist);
        
     }//GEN-LAST:event_GuardarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NuevaFactura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevaFactura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevaFactura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevaFactura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NuevaFactura().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Guardar;

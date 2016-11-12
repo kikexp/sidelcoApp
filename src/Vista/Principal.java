@@ -5,11 +5,39 @@
  */
 package Vista;
 
+import Controlador.Operaciones;
+import Modelos.Factura;
+import Modelos.Historial;
+import Modelos.Usuario;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Pc-desarrollo
  */
 public class Principal extends javax.swing.JFrame {
+
+    public static Usuario user = new Usuario(null, null, false, false, false, false, false, false);
+    Date fecha = new Date();
+    Operaciones oper = new Operaciones();
+    DefaultTableModel modeloTabla = new DefaultTableModel();
+    SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+
+    //formatoFecha.format (fecha);
+    // modeloTabla.setColumnIdentifiers (titulos);
+    //this.tabla.setModel (modeloTabla);
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
 
     /**
      * Creates new form Principal
@@ -17,6 +45,40 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         setLocationRelativeTo(null);
+        deshabilitarPermisos();
+        String titulos[] = {"Nº", "Fecha y Hora", "Actividad"};
+        modeloTabla.setColumnIdentifiers(titulos);
+        this.tabla.setModel(modeloTabla);
+    }
+
+    private void deshabilitarPermisos() {
+        if (!user.getGestionCadetes()) {
+            jButtonGestionCadete.setEnabled(false);
+        }
+        if (!user.getGestionEstadisticas()) {
+            estadisticas.setEnabled(false);
+        }
+        if (!user.getGestionClientes()) {
+            jButtonGestionClientes.setEnabled(false);
+        }
+        if (!user.getGestionFacturacion()) {
+            jButtonFactura.setEnabled(false);
+        }
+        if (!user.getGestionMenu()) {
+            jButtonGestionMenu.setEnabled(false);
+        }
+        if (!user.getGestionUsuarios()) {
+            GestionUsuario.setEnabled(false);
+        }
+    }
+
+    public void habilitarPermisos() {
+        jButtonGestionCadete.setEnabled(user.getGestionCadetes());
+        estadisticas.setEnabled(user.getGestionEstadisticas());
+        jButtonGestionClientes.setEnabled(user.getGestionClientes());
+        jButtonFactura.setEnabled(user.getGestionFacturacion());
+        jButtonGestionMenu.setEnabled(user.getGestionMenu());
+        GestionUsuario.setEnabled(user.getGestionUsuarios());
     }
 
     /**
@@ -28,27 +90,371 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialogLogin = new javax.swing.JDialog();
+        jButtonIngresar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
+        jLabelUsuario = new javax.swing.JLabel();
+        jLabelContraseña = new javax.swing.JLabel();
+        usuario = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        contrasenia = new javax.swing.JPasswordField();
+        jDialogGestionUsuarios = new javax.swing.JDialog();
+        jButtonNuevoUsuario = new javax.swing.JButton();
+        jButtonModificarUsuario = new javax.swing.JButton();
+        jButtonHistorialUsuario = new javax.swing.JButton();
+        jButtonVolver = new javax.swing.JButton();
+        jDialogHistorialUsuario = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        nomUsu = new javax.swing.JTextField();
+        jButtonMostrarHistorial = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jButtonSalir = new javax.swing.JButton();
+        jDialogNuevoUsuario = new javax.swing.JDialog();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jCheckBoxClientes = new javax.swing.JCheckBox();
+        jCheckBoxMenu = new javax.swing.JCheckBox();
+        jCheckBoxCadetes = new javax.swing.JCheckBox();
+        jCheckBoxFacturacion = new javax.swing.JCheckBox();
+        jCheckBoxUsuarios = new javax.swing.JCheckBox();
+        jCheckBoxEstadisticas = new javax.swing.JCheckBox();
+        nombreUsuario = new javax.swing.JTextField();
+        contraseniaNueva = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jButtonGuardarNuevoUsuario = new javax.swing.JButton();
+        jButtonCancelarNuevoUsuario = new javax.swing.JButton();
         jButtonGestionClientes = new javax.swing.JButton();
         jButtonGestionCadete = new javax.swing.JButton();
         jButtonGestionMenu = new javax.swing.JButton();
         jButtonCambiarUsuario = new javax.swing.JButton();
-        jButtonSalir = new javax.swing.JButton();
+        jButtonCerrarSesion = new javax.swing.JButton();
+        jButtonFactura = new javax.swing.JButton();
+        estadisticas = new javax.swing.JButton();
+        GestionUsuario = new javax.swing.JButton();
+        jButtonIniciarSesion = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jButtonIngresar.setText("Ingresar");
+        jButtonIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIngresarActionPerformed(evt);
+            }
+        });
+
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
+
+        jLabelUsuario.setText("Usuario");
+
+        jLabelContraseña.setText("Contraseña");
+
+        usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Login");
+
+        contrasenia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contraseniaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialogLoginLayout = new javax.swing.GroupLayout(jDialogLogin.getContentPane());
+        jDialogLogin.getContentPane().setLayout(jDialogLoginLayout);
+        jDialogLoginLayout.setHorizontalGroup(
+            jDialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogLoginLayout.createSequentialGroup()
+                .addGroup(jDialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogLoginLayout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addComponent(jLabel1))
+                    .addGroup(jDialogLoginLayout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addGroup(jDialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelUsuario)
+                            .addComponent(jLabelContraseña))
+                        .addGap(79, 79, 79)
+                        .addGroup(jDialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                            .addComponent(contrasenia)))
+                    .addGroup(jDialogLoginLayout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(jButtonIngresar)
+                        .addGap(33, 33, 33)
+                        .addComponent(jButtonCancelar)))
+                .addContainerGap(82, Short.MAX_VALUE))
+        );
+        jDialogLoginLayout.setVerticalGroup(
+            jDialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogLoginLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(49, 49, 49)
+                .addGroup(jDialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelUsuario)
+                    .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(jDialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelContraseña)
+                    .addComponent(contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addGroup(jDialogLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonIngresar)
+                    .addComponent(jButtonCancelar))
+                .addGap(71, 71, 71))
+        );
+
+        jButtonNuevoUsuario.setText("Nuevo Usuario");
+        jButtonNuevoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNuevoUsuarioActionPerformed(evt);
+            }
+        });
+
+        jButtonModificarUsuario.setText("Modificar Usuario");
+        jButtonModificarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarUsuarioActionPerformed(evt);
+            }
+        });
+
+        jButtonHistorialUsuario.setText("Historial Usuario");
+        jButtonHistorialUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHistorialUsuarioActionPerformed(evt);
+            }
+        });
+
+        jButtonVolver.setText("Volver");
+        jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVolverActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialogGestionUsuariosLayout = new javax.swing.GroupLayout(jDialogGestionUsuarios.getContentPane());
+        jDialogGestionUsuarios.getContentPane().setLayout(jDialogGestionUsuariosLayout);
+        jDialogGestionUsuariosLayout.setHorizontalGroup(
+            jDialogGestionUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogGestionUsuariosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonVolver)
+                .addGap(38, 38, 38))
+            .addGroup(jDialogGestionUsuariosLayout.createSequentialGroup()
+                .addContainerGap(131, Short.MAX_VALUE)
+                .addGroup(jDialogGestionUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonNuevoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonHistorialUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(131, Short.MAX_VALUE))
+        );
+        jDialogGestionUsuariosLayout.setVerticalGroup(
+            jDialogGestionUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogGestionUsuariosLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(jButtonNuevoUsuario)
+                .addGap(32, 32, 32)
+                .addComponent(jButtonModificarUsuario)
+                .addGap(33, 33, 33)
+                .addComponent(jButtonHistorialUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(jButtonVolver)
+                .addGap(28, 28, 28))
+        );
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nº", "Fecha y Hora", "Actividad"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tabla.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jScrollPane1.setViewportView(tabla);
+
+        jLabel2.setText("Ingrese Nombre de Usuario:");
+
+        jButtonMostrarHistorial.setText("Mostrar Historial");
+        jButtonMostrarHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMostrarHistorialActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel3.setText("Historial Usuario");
+
+        jButtonSalir.setText("Salir");
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialogHistorialUsuarioLayout = new javax.swing.GroupLayout(jDialogHistorialUsuario.getContentPane());
+        jDialogHistorialUsuario.getContentPane().setLayout(jDialogHistorialUsuarioLayout);
+        jDialogHistorialUsuarioLayout.setHorizontalGroup(
+            jDialogHistorialUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogHistorialUsuarioLayout.createSequentialGroup()
+                .addGroup(jDialogHistorialUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogHistorialUsuarioLayout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(nomUsu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jButtonMostrarHistorial))
+                    .addGroup(jDialogHistorialUsuarioLayout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addComponent(jLabel3))
+                    .addGroup(jDialogHistorialUsuarioLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(81, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogHistorialUsuarioLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonSalir)
+                .addGap(39, 39, 39))
+        );
+        jDialogHistorialUsuarioLayout.setVerticalGroup(
+            jDialogHistorialUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogHistorialUsuarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jDialogHistorialUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(nomUsu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonMostrarHistorial))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(jButtonSalir)
+                .addContainerGap())
+        );
+
+        jLabel4.setText("Nombre de Usuario:");
+
+        jLabel5.setText("Contraseña:");
+
+        jLabel6.setText("Permisos:");
+
+        jCheckBoxClientes.setText("Gestion Clientes");
+
+        jCheckBoxMenu.setText("Gestion Menu");
+
+        jCheckBoxCadetes.setText("Gestion Cadetes");
+
+        jCheckBoxFacturacion.setText("Gestion Facuracion");
+
+        jCheckBoxUsuarios.setText("Gestion Usuarios");
+
+        jCheckBoxEstadisticas.setText("Gestion Estadisticas");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel7.setText("Nuevo Usuario");
+
+        jButtonGuardarNuevoUsuario.setText("Guardar");
+        jButtonGuardarNuevoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGuardarNuevoUsuarioActionPerformed(evt);
+            }
+        });
+
+        jButtonCancelarNuevoUsuario.setText("Cancelar");
+        jButtonCancelarNuevoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarNuevoUsuarioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialogNuevoUsuarioLayout = new javax.swing.GroupLayout(jDialogNuevoUsuario.getContentPane());
+        jDialogNuevoUsuario.getContentPane().setLayout(jDialogNuevoUsuarioLayout);
+        jDialogNuevoUsuarioLayout.setHorizontalGroup(
+            jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogNuevoUsuarioLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogNuevoUsuarioLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(43, 43, 43)
+                        .addGroup(jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBoxClientes)
+                            .addComponent(jCheckBoxCadetes)
+                            .addComponent(jCheckBoxUsuarios))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addGroup(jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBoxMenu)
+                            .addComponent(jCheckBoxFacturacion)
+                            .addComponent(jCheckBoxEstadisticas))
+                        .addGap(55, 55, 55))
+                    .addGroup(jDialogNuevoUsuarioLayout.createSequentialGroup()
+                        .addGroup(jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(32, 32, 32)
+                        .addGroup(jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(nombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(contraseniaNueva))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jDialogNuevoUsuarioLayout.createSequentialGroup()
+                .addGap(145, 145, 145)
+                .addComponent(jLabel7)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogNuevoUsuarioLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonGuardarNuevoUsuario)
+                .addGap(36, 36, 36)
+                .addComponent(jButtonCancelarNuevoUsuario)
+                .addGap(42, 42, 42))
+        );
+        jDialogNuevoUsuarioLayout.setVerticalGroup(
+            jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogNuevoUsuarioLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel7)
+                .addGap(31, 31, 31)
+                .addGroup(jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(nombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(contraseniaNueva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addGroup(jDialogNuevoUsuarioLayout.createSequentialGroup()
+                        .addGroup(jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBoxClientes)
+                            .addComponent(jCheckBoxMenu))
+                        .addGap(18, 18, 18)
+                        .addGroup(jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBoxCadetes)
+                            .addComponent(jCheckBoxFacturacion))
+                        .addGap(18, 18, 18)
+                        .addGroup(jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBoxUsuarios)
+                            .addComponent(jCheckBoxEstadisticas))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(jDialogNuevoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonGuardarNuevoUsuario)
+                    .addComponent(jButtonCancelarNuevoUsuario))
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,60 +486,118 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jButtonSalir.setText("Salir");
-        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCerrarSesion.setText("Cerrar Sesion");
+        jButtonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSalirActionPerformed(evt);
+                jButtonCerrarSesionActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Nueva Factura");
+        jButtonFactura.setText("Nueva Factura");
+        jButtonFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFacturaActionPerformed(evt);
+            }
+        });
+
+        estadisticas.setText("Estadisticas");
+        estadisticas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estadisticasActionPerformed(evt);
+            }
+        });
+
+        GestionUsuario.setText("Gestion Usuarios");
+        GestionUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GestionUsuarioActionPerformed(evt);
+            }
+        });
+
+        jButtonIniciarSesion.setText("Iniciar Sesion");
+        jButtonIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIniciarSesionActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Ver Usuario Actual");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel8.setText("Si.Del.Co");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jButtonCambiarUsuario)
-                            .addGap(19, 19, 19))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jButtonSalir)
-                            .addGap(391, 391, 391)))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(163, 163, 163))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addContainerGap(99, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(GestionUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(estadisticas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonGestionCadete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonGestionClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonGestionMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60))))
+                            .addComponent(jButtonGestionMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addComponent(jButtonFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(132, 132, 132))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1)
+                                .addGap(25, 25, 25))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(397, 397, 397)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButtonCambiarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButtonCerrarSesion)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonIniciarSesion)
+                .addGap(11, 11, 11)
                 .addComponent(jButtonCambiarUsuario)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonGestionClientes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonGestionMenu)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonGestionCadete)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonFactura)
+                        .addGap(35, 35, 35)))
+                .addComponent(estadisticas)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonGestionMenu)
+                    .addComponent(GestionUsuario)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonGestionCadete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
-                .addComponent(jButtonSalir)
-                .addGap(21, 21, 21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(jButtonCerrarSesion)
+                .addContainerGap())
         );
 
         pack();
@@ -141,31 +605,193 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButtonGestionClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGestionClientesActionPerformed
         new Vista.GestionClientes().setVisible(true);
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Ingreso a Gestion Clientes");
+        oper.altaReg(hist);
         this.dispose();
     }//GEN-LAST:event_jButtonGestionClientesActionPerformed
 
     private void jButtonGestionCadeteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGestionCadeteActionPerformed
         new Vista.GestionCadetes().setVisible(true);
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Ingreso a Gestion Cadete");
+        oper.altaReg(hist);
         this.dispose();
     }//GEN-LAST:event_jButtonGestionCadeteActionPerformed
 
     private void jButtonGestionMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGestionMenuActionPerformed
         new Vista.GestionMenu().setVisible(true);
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Ingreso a Gestion Menu");
+        oper.altaReg(hist);
         this.dispose();
     }//GEN-LAST:event_jButtonGestionMenuActionPerformed
 
     private void jButtonCambiarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCambiarUsuarioActionPerformed
-        new Vista.Login().setVisible(true);
-        this.dispose();
+        jDialogLogin.setVisible(true);
     }//GEN-LAST:event_jButtonCambiarUsuarioActionPerformed
 
-    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+    private void jButtonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarSesionActionPerformed
+        if (user.getNombreUsuario() != null) {
+            fecha = new Date();
+            Historial hist = new Historial(fecha, user, "Cerro sesion");
+            oper.altaReg(hist);
+        }
         this.dispose();
+    }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
+
+    private void jButtonFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFacturaActionPerformed
+        new Vista.NuevaFactura().setVisible(true);
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Ingreso a Nueva Factura");
+        oper.altaReg(hist);
+        this.dispose();
+    }//GEN-LAST:event_jButtonFacturaActionPerformed
+
+    private void estadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadisticasActionPerformed
+        new Vista.Estadisticas().setVisible(true);
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Ingreso a Gestion Estadisticas");
+        oper.altaReg(hist);
+        this.dispose();
+    }//GEN-LAST:event_estadisticasActionPerformed
+
+    private void jButtonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarSesionActionPerformed
+        jDialogLogin.setSize(400, 300);
+        jDialogLogin.setLocationRelativeTo(null);
+        jDialogLogin.setVisible(true);
+    }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
+
+    private void jButtonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresarActionPerformed
+
+        Operaciones oper = new Operaciones();
+        //Usuario usu = new Usuario("admin", "admin", false, true, true, true, false, true);
+        user = oper.buscarUsuario(usuario.getText());
+        if (user != null) {
+            if (user.getContrasenia().equals(contrasenia.getText())) {
+                habilitarPermisos();
+                jDialogLogin.setVisible(false);
+                fecha = new Date();
+                Historial hist = new Historial(fecha, user, "Inicio sesion en el sistema");
+                oper.altaReg(hist);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+            jDialogLogin.setVisible(true);
+        }
+    }//GEN-LAST:event_jButtonIngresarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // TODO add your handling code here:
+        jDialogLogin.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usuarioActionPerformed
+
+    private void contraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseniaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contraseniaActionPerformed
+
+    private void jButtonHistorialUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHistorialUsuarioActionPerformed
+        // TODO add your handling code here:
+        jDialogHistorialUsuario.setSize(600, 400);
+        jDialogHistorialUsuario.setLocationRelativeTo(null);
+        jDialogHistorialUsuario.setVisible(true);
+        jDialogGestionUsuarios.dispose();
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Ingreso a Historial Usuario");
+        oper.altaReg(hist);
+    }//GEN-LAST:event_jButtonHistorialUsuarioActionPerformed
+
+    private void jButtonMostrarHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarHistorialActionPerformed
+        for (int i = 0; i < tabla.getRowCount(); i++) {
+            modeloTabla.removeRow(i);
+            i -= 1;
+        }
+        Historial reg = new Historial();
+        List hist = oper.listarHistorial();
+        Iterator<Historial> iter = hist.iterator();
+        int i = 1;
+        while (iter.hasNext()) {
+            reg = iter.next();
+            if (reg.getUsuario().getNombreUsuario().equals(nomUsu.getText())) {
+                String[] fila = new String[]{"" + i, "" + reg.getFechayHora(), reg.getDescripcion()};
+                modeloTabla.addRow(fila);
+                i++;
+            }
+        }
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(4);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(30);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(150);
+        fecha = new Date();
+        Historial histor = new Historial(fecha, user, "Vio el Historial del Usuario: " + nomUsu.getText());
+        oper.altaReg(histor);
+    }//GEN-LAST:event_jButtonMostrarHistorialActionPerformed
+
+    private void GestionUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionUsuarioActionPerformed
+        jDialogGestionUsuarios.setSize(500, 400);
+        jDialogGestionUsuarios.setLocationRelativeTo(null);
+        jDialogGestionUsuarios.setVisible(true);
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Ingreso a Gestion Usuarios");
+        oper.altaReg(hist);
+        this.setVisible(false);
+    }//GEN-LAST:event_GestionUsuarioActionPerformed
+
+    private void jButtonNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoUsuarioActionPerformed
+        // TODO add your handling code here:
+        jDialogNuevoUsuario.setSize(500, 400);
+        jDialogNuevoUsuario.setLocationRelativeTo(null);
+        jDialogNuevoUsuario.setVisible(true);
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Ingreso a Nuevo Usuario");
+        oper.altaReg(hist);
+        jDialogGestionUsuarios.setVisible(false);
+    }//GEN-LAST:event_jButtonNuevoUsuarioActionPerformed
+
+    private void jButtonModificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarUsuarioActionPerformed
+        // TODO add your handling code here:
+
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Ingreso a Modificar Usuario");
+        oper.altaReg(hist);
+    }//GEN-LAST:event_jButtonModificarUsuarioActionPerformed
+
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        // TODO add your handling code here:
+        jDialogHistorialUsuario.dispose();
+        jDialogGestionUsuarios.setVisible(true);
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
+    private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
+        // TODO add your handling code here:
+        jDialogGestionUsuarios.dispose();
+        this.setVisible(true);
+    }//GEN-LAST:event_jButtonVolverActionPerformed
+
+    private void jButtonGuardarNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarNuevoUsuarioActionPerformed
+        // TODO add your handling code here:
+        Usuario usu = new Usuario(nombreUsuario.getText(), contraseniaNueva.getText(),
+                jCheckBoxCadetes.isSelected(), jCheckBoxMenu.isSelected(), jCheckBoxClientes.isSelected(),
+                jCheckBoxEstadisticas.isSelected(), jCheckBoxUsuarios.isSelected(), jCheckBoxFacturacion.isSelected());
+        oper.alta(usu);
+        fecha = new Date();
+        Historial hist = new Historial(fecha, user, "Creo un nuevo Usuario");
+        oper.altaReg(hist);
+        jDialogNuevoUsuario.dispose();
+        jDialogGestionUsuarios.setVisible(true);
+    }//GEN-LAST:event_jButtonGuardarNuevoUsuarioActionPerformed
+
+    private void jButtonCancelarNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarNuevoUsuarioActionPerformed
+        jDialogNuevoUsuario.dispose();
+        jDialogGestionUsuarios.setVisible(true);
+    }//GEN-LAST:event_jButtonCancelarNuevoUsuarioActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new Vista.NuevaFactura().setVisible(true);
-        this.dispose();
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(rootPane, user.getNombreUsuario());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -207,13 +833,52 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton GestionUsuario;
+    private javax.swing.JPasswordField contrasenia;
+    private javax.swing.JTextField contraseniaNueva;
+    private javax.swing.JButton estadisticas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCambiarUsuario;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonCancelarNuevoUsuario;
+    private javax.swing.JButton jButtonCerrarSesion;
+    private javax.swing.JButton jButtonFactura;
     private javax.swing.JButton jButtonGestionCadete;
     private javax.swing.JButton jButtonGestionClientes;
     private javax.swing.JButton jButtonGestionMenu;
+    private javax.swing.JButton jButtonGuardarNuevoUsuario;
+    private javax.swing.JButton jButtonHistorialUsuario;
+    private javax.swing.JButton jButtonIngresar;
+    private javax.swing.JButton jButtonIniciarSesion;
+    private javax.swing.JButton jButtonModificarUsuario;
+    private javax.swing.JButton jButtonMostrarHistorial;
+    private javax.swing.JButton jButtonNuevoUsuario;
     private javax.swing.JButton jButtonSalir;
+    private javax.swing.JButton jButtonVolver;
+    private javax.swing.JCheckBox jCheckBoxCadetes;
+    private javax.swing.JCheckBox jCheckBoxClientes;
+    private javax.swing.JCheckBox jCheckBoxEstadisticas;
+    private javax.swing.JCheckBox jCheckBoxFacturacion;
+    private javax.swing.JCheckBox jCheckBoxMenu;
+    private javax.swing.JCheckBox jCheckBoxUsuarios;
+    private javax.swing.JDialog jDialogGestionUsuarios;
+    private javax.swing.JDialog jDialogHistorialUsuario;
+    private javax.swing.JDialog jDialogLogin;
+    private javax.swing.JDialog jDialogNuevoUsuario;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelContraseña;
+    private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField nomUsu;
+    private javax.swing.JTextField nombreUsuario;
+    private javax.swing.JTable tabla;
+    private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
 }
